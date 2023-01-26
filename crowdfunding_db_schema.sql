@@ -34,3 +34,36 @@ CREATE TABLE Campaign (
 	FOREIGN KEY (category) REFERENCES Category(category_id),
 	FOREIGN KEY (subcategory) REFERENCES Subcategory(subcategory_id)
 );
+
+--datestyle set to match CSV files
+SET datestyle TO postgres, ymd;
+SHOW datestyle;
+
+COPY Contact(contact_id, first_name, last_name, email)
+	FROM 'C:\Users\david\Desktop\git\Crowdfunding_ETL\Resources\contacts.csv'
+	DELIMITER ','
+	CSV HEADER;
+	
+COPY Category(category_id, category)
+	FROM 'C:\Users\david\Desktop\git\Crowdfunding_ETL\Resources\category.csv'
+	DELIMITER ','
+	CSV HEADER;
+	
+COPY Subcategory(subcategory_id, subcategory)
+	FROM 'C:\Users\david\Desktop\git\Crowdfunding_ETL\Resources\subcategory.csv'
+	DELIMITER ','
+	CSV HEADER;
+	
+COPY Campaign(cf_df, contact_id, company_name, description, goal, pledge, outcome,
+			  backer_count, country, currency, launch_date,end_date, category, subcategory)
+	FROM 'C:\Users\david\Desktop\git\Crowdfunding_ETL\Resources\campaign.csv'
+	DELIMITER ','
+	CSV HEADER;
+
+SELECT * FROM Contact
+
+SELECT * FROM Category
+
+SELECT * FROM Subcategory
+
+SELECT * FROM campaign
